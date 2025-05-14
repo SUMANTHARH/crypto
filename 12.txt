@@ -1,0 +1,48 @@
+12]	  
+a.Demonstrate how to Perform a Port Scan using Scapy tool on target www.example.com.
+Ans:Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following cmds below:
+    
+from scapy.all import *
+
+target_ip = "scanme.nmap.org"
+ports = [22, 80]
+for port in ports:
+    pkt = IP(dst=target_ip)/TCP(dport=port, flags="S")
+    resp = sr1(pkt, timeout=1, verbose=0)
+    if resp:
+        if resp.haslayer(TCP) and resp[TCP].flags == "SA":
+            print(f"Port {port} is open")
+        elif resp.haslayer(TCP) and resp[TCP].flags == "RA":
+            print(f"Port {port} is closed")
+        else:
+            print(f"Port {port} is filtered or unknown response")
+    else:
+        print(f"No response from port {port}") // output is: Port 22 is open Port 80 is open
+
+-----    
+b.Using Nmap, Scan for vulnerabilities. Also demonstrate how to save results to a text file.
+Ans:Open Nmap or Zenmap,
+ Under cmd field type these 3 cmd:
+     nmap --script http-vuln-cve2017-8917 example.com
+     nmap --script vulners --script-args mincvss=5.0 example.com
+     nmap -oN "C:\\Users\\Neha\\prart\\scan_result.txt" example.com //saves to desktop
+    
+-----    
+c.What operations are suppliers permitted to do once they have logged into the “suppliers only” area?
+  Use SQL injection to bypass authentication, or find a way to create an account as a supplier. 
+Ans:
+(answer: Upload Price Lists)
+
+Login using admin:secret
+Type this url: http://192.168.36.143/cgi-bin/badstore.cgi?action=admin
+
+The admin panel shows some options , we will select show current users -> do it
+
+joe@supplier.com 62072d95acb588c7ee9d6fa0c6c85155 green Joe SupplierS   take this
+
+get the plain password from: https://md5.gromweb.com/?md5=62072d95acb588c7ee9d6fa0c6c85155 
+After loggin in as a supplier , you will be redirected to : http://192.168.1.111/cgi-bin/badstore.cgi?action=supplierportal
+And you have the option to Upload price Lists So the answer is :Upload Price Lists
