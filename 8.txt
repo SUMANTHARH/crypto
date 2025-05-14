@@ -1,0 +1,42 @@
+8]
+a.Write a python code using Scapy for creating a Network Scanner (Hint: Create an ARP packet using ARP() method ).
+Ans:Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following cmd below:
+     
+from scapy.all import *
+request = ARP()
+request.pdst = '192.168.6.0/24'
+broadcast = Ether()
+broadcast.dst = "ff:ff:ff:ff:ff:ff"
+req_broadcast = broadcast / request
+clients = srp(req_broadcast, timeout=3, verbose=False)[0]
+if not clients:
+    print("No clients found or no response received.")
+else:
+    for element in clients:
+        print(element[1].psrc + " " + element[1].hwsrc) // u will get this output: 192.168.6.149 00:45:e2:c0:b1:fd 192.168.6.81 f6:31:8e:7d:ba:ab
+-----    
+b.Using NetCat, show communication between browser and the server. (for plain text)
+Ans:Go to seed vm ,open termial and type:
+ nc -vlp 1024 //shows the listening output
+Next, Go to browser and type: 127.0.0.1:1024 //hit enter
+Again come back to terminal….type:
+HTTP/1.1 200 OK
+Content-Type:text/html;charset:UTF-8
+Server:nooblinux
+
+<!doctype html>
+<title>trial</title>
+<h1>can u see me></h1> 
+(ctrl+c) //after this check the browser ..u can see the text of <h1> in the broswer
+
+-----
+c.Using Nmap, Scan a range of IPs. Also scan an entire subnet. 
+Ans:Open Nmap or Zenmap,
+ Under cmd field type:
+     nmap 184.168.112.11-16  and click on scan
+Next again ,
+Under cmd field type:
+    nmap 192.168.1.0/24 and click on scan
