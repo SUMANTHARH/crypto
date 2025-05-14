@@ -1,0 +1,36 @@
+13]	  
+a.Using NetCat, show communication between browser and the server (for an image).
+Ans:Go to seed vm ,open termial and type:
+  nc -vlp 1024 //shows the listening output
+Next, Go to browser and type: 127.0.0.1:1024 //hit enter
+Again come back to terminal….type:
+HTTP/1.1 200 OK
+Content-Type:text/html;charset:UTF-8
+Server:nooblinux
+
+<!doctype html>
+<title>trial</title>
+<h1>can u see me></h1> 
+<img src="image address"> // (do copy image location:its not possible in our systems..in lab it will work)
+
+(ctrl+c) //after this check the browser ..u can see the text of <h1> in the broswer and image
+    
+-----
+b.Using Nmap, Scan a range of IPs. Also scan an entire subnet. 
+Ans:Open Nmap or Zenmap,
+ Under cmd field type:
+ nmap 184.168.112.11-16
+ nmap 192.168.1.0/24    //for entire subset
+    
+-----    
+c.Log in as joe@supplier.com — — this is possible in a variety of ways, including SQL injection.
+  Then look at his previous orders and answer the question: What credit card number did he use to make a purchase of $46.95? 
+  Multiple answers are possible, but we will accept all of them. 
+Ans:
+Log in as joe(in Login/Register but not in supplier Login)
+ You will see a button on the left , to view joe orders(view previous orders), which will take you to http://192.168.1.111/cgi-bin/badstore.cgi?action=viewprevious
+
+Ctrl+F , after the page has loaded to search for $46.95 We got all credit cards of joe 
+
+Answer: 4111 1111 1111 1111 , 5500 0000 0000 0004
+    
