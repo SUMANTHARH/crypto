@@ -1,0 +1,53 @@
+16]	 
+a.Display the route and measure transit delays of packets across an IP network with Scapy (on www.example.com, www.google.com)
+Ans:Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following cmds below:
+ result,_=traceroute(["www.example.com","www.google.com"],maxttl=20) // u can see emission begins n packets
+     
+-------------------------------------------------------------------------------------------------
+b.Using NetCat, show communication between browser and the server(for an image).
+Ans::Go to seed vm ,open termial and type:
+  nc -vlp 1024 //shows the listening output
+Next, Go to browser and type: 127.0.0.1:1024 //hit enter
+Again come back to terminal….type:
+HTTP/1.1 200 OK
+Content-Type:text/html;charset:UTF-8
+Server:nooblinux
+
+<!doctype html>
+<title>trial</title>
+<h1>can u see me></h1> 
+<img src="image address"> // (do copy image location:its not possible in our systems..in lab it will work)
+
+(ctrl+c) //after this check the browser ..u can see the text of <h1> in the broswer and image
+    
+-----    
+c.BadStore uses cookies to track the contents of the cart, once you’ve added something to it.
+  What is the key of the cookie used for the cart?
+Ans:
+Login as joe@supplier.com -> iforgot
+go to whats new -> add items to cart
+in search bar -> <script>alert(document.cookie)</script>
+Answer : cartId
+*********************************************************************************************************************************** 
+
+*****************************************************************************************************************************     
+Nmap (Network Mapper)
+Nmap (Network Mapper) is a powerful tool for network discovery and security auditing. Here are some common Nmap commands and their uses: Basic Scans
+1. Ping Scan (determine which hosts are up): nmap -sn <target>
+2. Scan a single IP: nmap <ip>
+3. Scan a range of IPs: nmap <ip-range>
+4. Scan an entire subnet: nmap <subnet>/<CIDR>
+Port Scanning
+1. Scan specific ports: nmap -p <port1,port2,...> <target>
+2. Scan all 65535 ports: nmap -p- <target>
+3. Scan top 1000 ports (default): nmap <target>
+Service and Version Detection
+1. Detect service version: nmap -sV <target>
+2. OS detection: nmap -O <target>
+3. Aggressive scan (combines -sV, -O, and other scans): nmap -A <target>
+Scripts and Advanced Scans
+1. Run default scripts: nmap -sC <target>
+2. Scan for vulnerabilities: nmap --script vuln <target>
