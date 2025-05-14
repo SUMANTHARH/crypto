@@ -1,0 +1,43 @@
+1]
+
+a.Demonstrate the steganography tools used for hiding text inside an image. Also demonstrate how to recover a corrupted image using hexed editor.
+STEPS:
+Create a folder cryptos
+Open notepad,create 2 txt files named t1.txt and t2.txt(type 2 lines in each)->save it inside cryptos folder
+Dowload 2 png images(source.png and stego.png) and save to cryptos folder
+Now create a new zip file(t3.zip) inside the cryptos folder ->hving t1.txt and t2.txt
+Open terminal-> copy /B source.png + t3.zip stego.png  //U will get output as source.png and t3.zip 1 file(S)copied
+Next open stego.png with winrar //the text files will be moved inside tht png
+
+Next,
+Open image in hex editor:
+For jpg: FF D8 FF E0 ,For png: 89 50 4E 47 0D
+save the img
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+b.Demonstrate the working of ECB and CBC modes of AES on plain text using Openssl. 
+STEPS:
+Open seed in VM-terminalo 
+for cbc,
+gedit plain.txt //type 4 lines in the txt file
+openssl enc -aes-256-cbc -pass pass:root123 -p -in plain.txt -out file.txt //U will get,salt=357.. key= ,iv...
+cat file.txt
+openssl enc -aes-256-cbc -pass pass:root123 -d -in file.txt -out file1.txt //U will get the text tht u hd typed intially in plain.txt as o/p
+--
+for ecb,
+gedit plain.txt //type 4 lines in the txt file
+openssl enc -aes-256-ecb -pass pass:root123 -p -in plain.txt -out file.txt //U will get,salt=357.. key= ,iv...
+cat file.txt
+openssl enc -aes-256-ecb -pass pass:root123 -d -in file.txt -out file1.txt //U will get the text tht u hd typed intially in plain.txt as o/p
+
+-----
+c.Using RSA encrypt “This is cyber security lab. BNMIT Bengaluru”
+STEPS:
+openssl genrsa 1024 > key.pri 
+openssl rsa -in key.pri -out key.pub -pubout //writing RSA key
+gedit text.txt //type the text "This is cyber security lab.BNMIT Bangalore"
+openssl rsautl -encrypt -inkey key.pub -pubin -in text.txt -out Earth.enc 
+xxd Earth.enc //gives encrypted form
+opensssl rsautl -decrypt -inkey key.pri -in Earth.enc -out Earth.dec
+cat text.txt  //gives the text typed
+cat Earth.dec    //gives the decrypted text.
