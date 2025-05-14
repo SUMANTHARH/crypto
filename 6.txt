@@ -1,0 +1,36 @@
+6] 
+a.Log in as joe@supplier.com to Badstore— — this is possible in a variety of ways, including SQL injection. 
+Then look at his previous orders and answer the question: What credit card number did he use to make a purchase
+of $46.95? Multiple answers are possible. 
+
+Ans:
+Log in as joe(in Login/Register but not in supplier Login)
+You will see a button on the left , to view joe orders(view previous orders), which will take you to http://192.168.1.111/cgi-bin/badstore.cgi?action=viewprevious
+
+Ctrl+F , after the page has loaded to search for $46.95 We got all credit cards of joe 
+
+Answer: 4111 1111 1111 1111 , 5500 0000 0000 0004
+
+-----    
+b.How to Sniff with Scapy (for 10 packets and show the details of all the packets).
+Ans: Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following cmds below:
+ >>> packets=sniff(count=10)
+ >>> packets  /// U WILL GET THIS <Sniffed: TCP:10 UDP:0 ICMP:0 Other:0>
+ >>> packets.summary() //u Will get summary of packets
+ For detailed summary ,use the following cmds
+ >>> for pkt in packets:
+      pkt.show() //watch out for indentation here..u will get detail summary as output
+
+-----
+c.Using NetCat, show how to Communicate with the server using 2 terminals and across systems
+
+Ans: Go to seed vm ,
+ Open 1st termial and type: nc -vlp 1024
+ Open 2nd terminal and type: nc -v localhost 1024 // (start typing) u can see what u type in one 1 terminal reflecting on other
+
+ For doing Across systems://(This has to be done on 2 systems..so take the ip of 1st system for using in the 2nd system..ipconfig)
+ Terminal 1 (Machine a): nc -vlp 1024
+ Terminal 2 on another system: nc  <machina a ip>  1024 //(start typing)
