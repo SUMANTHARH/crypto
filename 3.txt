@@ -1,0 +1,62 @@
+3]
+
+a.Demonstrate the effects of padding in AES using Openssl.
+STEPS:
+Open terminal in seed,type
+echo -n "12345">f1.txt
+echo -n "123456789">f2.txt
+echo -n "1234567890abcdef">f3.txt
+ls -l f*.txt //check for f1,f2,f3
+Next,type
+openssl enc -aes-128-cbc -e -in f1.txt -out f1.bin -k 00112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+openssl enc -aes-128-cbc -e -in f2.txt -out f2.bin -k 00112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+openssl enc -aes-128-cbc -e -in f3.txt -out f3.bin -k 00112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+xxd f1.bin // displayed encrypted values
+xxd f2.bin
+xxd f3.bin
+Next,type
+openssl enc -aes-128-cbc -d -in f1.bin -out f11.bin -k 00112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+openssl enc -aes-128-cbc -d -in f2.bin -out f22.bin -k 00112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+openssl enc -aes-128-cbc -d -in f3.bin -out f33.bin -k 00112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+xxd f11.bin // displays 12345 with padding(Spacing)
+xxd f22.bin //displays  123456789 with padding
+xxd f33.bin //displays 1234567890abcdef with padding
+
+Next,type
+openssl enc -aes-128-cbc -d -in f1.bin -out p1.txt -nopad -k 00112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+gedit p1.txt //opens a p1.txt file -displays 12345 followed by some encodings
+
+-----
+
+b.Demonstrate the usage of tcpdump to capture packets based on different filters and protocols. Also demonstrate storing and retrieving data from files. 
+STEPS:
+tcpdump,
+Open seed terminal,type
+ifconfig //take ip address
+sudo tcpdump host 198.168.5.50 //ip address of ur website-specified host
+sudo tcpdump -i enp0s3 //give ctrl c ..this is for specified interface
+sudo tcpdump port 80//specified port
+
+sudo tcpdump port 80 -w httppkt.pcap //do not press enter ,open http://example.com ..then come to terminal and press enter and refresh the exmaple.com site for thrice
+sudo tcpdump -r httppkt.pcap //reading the file
+cat httppkt.pcap
+next open wireshark and click on the file like icon-5th icon and type the file name httppkt.pcap
+
+For ICMP,
+Open 2 terminals, 
+ping bnmit.org //1st terminal
+sudo tcpdump icmp and host 192.168.1.2 -w icmppkt.pcap//2nd terminal
+sudo tcpdump icmp and host 192.168.1.2 -r icmppkt.pcap
+next open wireshark and click on the file like icon-5th icon and type the file name icmppkt.pcap
+
+-----
+
+c.Demonstrate the use copy command by embedding two text files having your name in one text file and your USN in second text file into a image file.
+STEPS:
+Create 2 text files as text1.txt and text2.txt
+Add contents to the files (in text1 -> your name and in text2 -> your usn) and compress them to a zip file named text.zip
+Download a jpeg image into the same folder
+Open commad prompt and type cd "Path to the location"
+Then type copy /B image.jpeg + text.zip new.jpeg
+Open the new image using winrar and check the contents
+
