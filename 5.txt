@@ -1,0 +1,56 @@
+5]
+a.BadStore’s cart cookie is also an encoded string with a predictable structure XXX:YYY:… etc., and it probably contains information it shouldn’t.
+ Which field of the decoded string could an attacker change to give himself a discount on an item’s price?
+Ans:
+Login as joe@supplier.com -> iforgot
+go to whats new ->add items to cart
+in search bar -> <script>alert(document.cookie)</script>
+After getting the CartID value , and url-decoding it using https://www.urldecoder.org
+ CartID=1527258326%3A1%3A11.5%3A1000; 
+
+After url-decoding 1527258326:1:11.5:1000 
+
+Field 1 : 1527258326 is a unix timestamp 
+Field 2 : “Useless” 
+Field 3 : 11.5 is the price 
+Field 4 : 1000 is the item id. 
+So the attacker needs to edit the price field which is the third order.
+
+ Answer:Field 3
+
+-----
+
+b.	Using Scapy, create a frame that consists of an Ethernet layer, with an IP layer on top? With the show method, 
+    capture all fields of the frame. 
+    
+Ans: Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following 3 cmds below:
+ >>> from scapy.all import *
+ >>> my_frame=Ether()/IP(dst="8.8.8.8")
+ >>> my_frame  //u will get ether type and ip
+ >>> my_frame.show()  //this will show version,flags src...
+
+----- 
+
+c.	Write a Shell script for port scan using NetCat.
+Ans:Go to seed vm ,open termial and type:
+gedit n.sh //inside the file type as below
+
+#!/bin/bash
+host="www.example.com"
+read -p "Enter the starting port number: " start_port
+read -p "Enter the ending port number: " end_port
+for((port=start_port;port <= end_port;port++))
+	do
+		echo "Scanning port $port ... "
+		nc -zv -w1 "$host" "$port" 2>&1
+	done
+
+
+Now close the file,come back to terminal and type:
+chmod+x n.sh //changing permission
+./n.sh
+Here u will get:Enter the scanning port number : 79 //give 79
+                Enter the scanning port number : 81  //give 81 
