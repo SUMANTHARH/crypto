@@ -1,0 +1,56 @@
+4]
+
+a.Demonstrate the key generation, encryption and decryption procedure of RSA algorithm using Openssl. Also demonstrate the 
+encryption of a secret key using RSA 
+keypair. 
+STEPS:
+Open terminal in seed,type
+openssl rand -hex 16
+openssl rand -hex 32
+openssl rand -hex -out some_data 32
+cat some_data
+
+Next, type
+openssl genrsa //Displays begin and end RSA private key
+openssl genrsa 1024 //displays rsa private key
+
+Next,type
+openssl genrsa 1024 > key.pri //generates rsa private key
+openssl rsa -in key.pri -out key.pub -pubout //writing rsa key
+gedit newrsa.txt // type 2 full sentences in 2 lines in the text file
+openssl rsautl -encrypt -inkey key.pub -pubin -in newrsa.txt -out Earth.enc
+xxd Earth.enc //displays some values
+openssl rsautl -decrypt -inkey key.pri -in Earth.enc -out Earth.dec
+xxd Earth.dec //displays the 2 lines tht u hd typed in newrsa.txt
+
+Next type,
+openssl rand -hex -out encryption.key 32
+openssl rsautl -encrypt -inkey key.pub -pubin -in encryption.key -out encryption.key.enc
+openssl rsautl -decrypt -inkey key.pri -in encryption.key.enc -out encryption.key.dec
+cmp encryption.key encryption.key.dec //if u get no output after this cmd..then it means u hv got the crct o/p
+
+-----
+
+b.Capture and analyze the HTTP and HTTPS packets for example.com using the Wireshark tool. 
+STEPS:
+FOR HTTP,
+Open wireshark,stop capture.
+Then start capture again.
+Open http://example.com/ ->in wireshark ->apply filter http ->port no:80 to be shown
+FOR HTTPS,
+Open wireshark,stop capture.
+Then start capture again.
+Open https://example.com/ ->in wireshark ->apply filter ssl ->port no:443 to be shown
+
+-----
+c.
+Demonstrate the working of AES ECB encryption and decryption using openssl tool on a text file having the contents 
+"Welcome to BNM Institute of Technology, Cyber lab".
+STEPS:
+gedit plain.txt ->type this "Welcome to BNM Institute of Technology, cyber lab"
+openssl enc -aes-256-ecb -pass pass:prart -p -in plain.txt -out file.txt//u will get salt and key
+
+cat file.txt
+
+openssl enc -aes-256-ecb -pass pass:prart -d -in file.txt -out file1.txt
+cat file1.txt //u can see the text
