@@ -1,0 +1,48 @@
+7]
+a.Demonstrate how to perform traceroute in Scapy.
+
+Ans: Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following cmd below:
+>>> result,_=traceroute(["www.example.com","www.google.com"],maxttl=20) // u can see emission begins n packets
+
+-----
+b.Using NetCat, show the usage of HTML  Request/Response (HEAD /GET). 
+
+Ans: Go to seed vm ,open termial and type:
+
+gedit a.txt//inside this file type and keep this for quickly copy n pasting
+GET / HTTP/1.1
+Host: example.com
+User-Agent: curl/7.47.0
+Accept:*/*
+
+After typing this inside the text file,come back to terminal n type,    
+
+nc -v example.com 80 //it will show connection success msg
+Soon after the success message copy the lines u typed in the text file and paste it here in terminal like below
+
+GET / HTTP/1.1
+Host: example.com
+User-Agent: curl/7.47.0
+Accept:*/*
+
+This will give the response as output 
+
+Similarly follow the same procedure for HEAD.Use the below lines for it.
+
+HEAD / HTTP/1.1
+Host: example.com
+User-Agent: curl/7.47.0
+Accept:*/*
+
+-----
+c.Using Nmap perform Ping Scan (determine which hosts are up). Also show how to scan a single IP. 
+
+Ans: Open Nmap or Zenmap,
+ Under cmd field type:
+     nmap -sn example.com  and click on scan
+Next again to show for single Ip,
+Under cmd field type:
+    nmap 184.168.112.11 and click on scan
