@@ -1,0 +1,45 @@
+2]
+
+a.Demonstrate the steganography tools for hiding text in an audio file. 
+STEPS:
+Open paint-black bg ,white text - save as bmp file.
+Open the saved bmp in COAGULA LIGHT-Click on 'Render img without noise\blue'-Save as sound file-.wav //.wav extension
+Open SONIC VISUALIZER - open the .wav file - Layer menu - Add spectogram for all channels //The hidden text is seen in the audio file by zooming
+
+-----
+
+b.Demonstrate the workings of the ECB and CBC modes of AES on a bitmap image using OpenSSL.
+
+STEPS:
+Open paint-choose shapes-draw star-fill colour red-save as bitmap image(pic_original.bmp) //(use drag n drop or gmail in the virtualbox to open the bitmap image )
+or
+Open pic_original.bmp in google and open the crypto-lab link -under files needed u get a link pic_original.bmp//download it
+--
+Open terminal in seed
+for ecb,
+openssl enc -aes-128-ecb -e -in pic_original.bmp -out pic_ecb.bmp -k 112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+eog pic_ecb.bmp //will not display any image(error)
+head -c 54 pic_original.bmp > header
+tail -c +55 pic_ecb.bmp > body_ecb
+cat header body_ecb > new_ecb.bmp
+eog new_ecb.bmp  //this will display tht star in a blurred format
+--
+for cbc,
+openssl enc -aes-128-ecb -e -in pic_original.bmp -out pic_cbc.bmp -k 112233445566778899aabbccddeeff -iv 0102030405060708090a0b0c0d0e0f
+eog pic_cbc.bmp // will not display any img(error)
+head -c 54 pic_original.bmp > header
+tail -c +55 pic_cbc.bmp > body_cbc
+cat header body_cbc > new_cbc.bmp
+eog new_cbc.bmp //this will display full blur image
+
+-----
+
+c.Make use of wireshark packet capture tool and demonstate the security of http and https protocol. And also demonstate TCP hand shake protocol.
+STEPS:
+Capture http packets from http://www.example.com
+in wireshark filter using http and select the packet with text/html...click on line based data to view html code
+
+Similarly for https, use tls filter and show the port nos as 443 in one of the packets
+
+for tcp, change the filter to tcp for the same https packets to view the handshake protocol    
+
