@@ -1,0 +1,36 @@
+15]
+
+a.Using Nmap show OS detection. Also demonstrate how to perform Aggressive scan.
+Ans:Open Nmap or Zenmap,
+ Under cmd field type:
+    nmap -O example.com
+ Again for Aggressive scan under cmd type:
+    nmap -A example.com
+
+-----
+b.Using NetCat, show communication between browser and the server. (for an image)
+Ans:Go to seed vm ,open termial and type:
+  nc -vlp 1024 //shows the listening output
+Next, Go to browser and type: 127.0.0.1:1024 //hit enter
+Again come back to terminal….type:
+HTTP/1.1 200 OK
+Content-Type:text/html;charset:UTF-8
+Server:nooblinux
+
+<!doctype html>
+<title>trial</title>
+<h1>can u see me></h1> 
+<img src="image address"> // (do copy image location:its not possible in our systems..in lab it will work)
+
+(ctrl+c) //after this check the browser ..u can see the text of <h1> in the broswer and image
+
+-----   
+
+c.BadStore uses cookies to implement a session key, once you’ve authenticated, and for tracking the contents of the cart, 
+  once you’ve added something to it. You can figure out the cookies in use by BadStore in various ways. 
+  What is the key of the session cookie? 
+Ans:
+Login as admin->secret
+in search box -> <script>alert(document.cookie)</script>
+
+answer is:SSOid//it has the following format key:value
