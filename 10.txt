@@ -1,0 +1,37 @@
+10]
+a.BadStore uses cookies to track the contents of the cart, once you’ve added something to it. 
+  What is the key of the cookie used for the cart?
+Ans:
+Login as joe@supplier.com -> iforgot
+go to whats new -> add items to cart
+in search bar -> <script>alert(document.cookie)</script>
+Answer : cartId
+
+-----    
+b.Write a Shell script for port scan using NetCat.
+Ans:Go to seed vm ,open termial and type:
+gedit n.sh //inside the file type as below
+
+#!/bin/bash
+host="www.example.com"
+read -p "Enter the starting port number: " start_port
+read -p "Enter the ending port number: " end_port
+for((port=start_port;port <= end_port;port++))
+	do
+		echo "Scanning port $port ... "
+		nc -zv -w1 "$host" "$port" 2>&1
+	done
+
+
+Now close the file,come back to terminal and type:
+chmod+x n.sh //changing permission
+./n.sh
+Here u will get:Enter the scanning port number : 79 //give 79
+                Enter the scanning port number : 81  //give 81 
+-----
+c.Using Nmap, scan top 1000 ports (default). Also show how to detect service version. 
+Ans:Open Nmap or Zenmap,
+ Under cmd field type:
+    nmap bnmit.org
+Again for showing service version ,under cmd type:    
+    nmap -sV example.com
