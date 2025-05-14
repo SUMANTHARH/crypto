@@ -1,0 +1,35 @@
+14]	 
+a.Create a simple network monitor that watches for ICMP packets using python function callback in Scapy.
+Ans:Open cmd prompt(normal)
+ Next,type pip install scapy  //(if not already installed)
+ Then type: scapy //hit enter
+ Type the following  cmds below:
+from scapy.all import *
+def packet_callback(packet):
+    if packet[IP].proto == 1:
+        print(f"ICMP packet from {packet[IP].src}")
+
+sniff(prn=packet_callback, filter="icmp", store=0)
+//This will give icmp packets...press enter for total count
+
+-----
+b.Using Nmap, scan the top 1000 ports (default). Also show how to detect service version.
+Ans:Open Nmap or Zenmap,
+ Under cmd field type:
+    nmap bnmit.org
+Again for showing service version ,under cmd type:    
+    nmap -sV example.com
+
+-----
+c.Get administrator privileges and then use the admin action to look at the user database. There are two users whose emails 
+  have the form XXX@whole.biz; what is the XXX portion of either of the two users? For example, if one of the users is 
+  jackie@whole.biz, the right answer is jackie. (The answer is case-sensitive.) 
+Ans:
+
+After logging in with admin account: admin:secret Navigate to : or 
+http://192.168.1.111/cgi-bin/badstore.cgi?action=admin 
+And view users accounts , CTRL+F and search for whole.biz
+We got two matches : fred@whole.biz landon@whole.biz 
+
+Answer: fred , landon 
+    
